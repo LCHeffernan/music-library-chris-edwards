@@ -1,0 +1,23 @@
+{
+  "name": "music-libary",
+  "version": "1.0.0",
+  "description": "A music library built with Javascript, postgres , docker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeChris96/music-libary.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CodeChris96/music-libary/issues"
+  },
+  "homepage": "https://github.com/CodeChris96/music-libary#readme",
+  "devDependencies": {
+    "eslint": "^8.34.0"
+  }
+}
