@@ -6,7 +6,11 @@ describe('create artist', () => {
   describe('/artists', () => {
     describe('POST', () => {
       it('creates a new artist in the database', async () => {
-        const res = await await request(app).post('/artists');
+        const res = await request(app).post('/artists').send({
+          name: 'Tame Impala',
+          genre: 'rock',
+        });
+
         expect(res.status).to.equal(201);
       });
     });
