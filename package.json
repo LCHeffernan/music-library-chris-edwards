@@ -4,20 +4,33 @@
   "description": "A music library built with Javascript, postgres , docker",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prestart": "node scripts/create-database.js",
+    "start": "nodemon -r dotenv/config index.js",
+    "test": "mocha tests/**/*.js --exit --recursive --timeout 60000 --file ./tests/test-setup.js",
+    "pretest": "node scripts/create-database.js test",
+    "posttest": "node scripts/drop-database.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CodeChris96/music-libary.git"
+    "url": "git+https://github.com/CodeChris96/music-library.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/CodeChris96/music-libary/issues"
+    "url": "https://github.com/CodeChris96/music-library/issues"
   },
-  "homepage": "https://github.com/CodeChris96/music-libary#readme",
+  "homepage": "https://github.com/CodeChris96/music-library#readme",
   "devDependencies": {
-    "eslint": "^8.34.0"
+    "chai": "^4.3.7",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.34.0",
+    "mocha": "^10.2.0",
+    "nodemon": "^2.0.20",
+    "supertest": "^6.3.3"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "pg": "^8.9.0"
   }
 }
