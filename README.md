@@ -6,8 +6,7 @@ This is a work-in-progress web application designed to manage a music library.
 
 The app is built using the following technologies:
 
-## JavaScript
-
+JavaScript
 Express
 Docker
 pgAdmin 4
@@ -22,10 +21,11 @@ To run the app, first clone the repository to your local machine. Install any ne
 User can view music library
 User can add new artists to the library
 User can add new genres to the library
+
 This is a basic version of the app and will be updated with more features and functionality in the future.
 
 ## Contributors:
 
-** - Chris Edwards **
+**- Chris Edwards**
 
 Feel free to fork the repository and contribute to the project.
