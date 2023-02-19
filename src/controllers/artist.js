@@ -11,7 +11,8 @@ const createArtist = async (req, res) => {
     );
     res.status(201).json(artist);
   } catch (err) {
-    res.status(500).json(err.message);
+    console.error(err);
+    res.status(400).json({ message: 'Failed to create artist' });
   }
 };
 
