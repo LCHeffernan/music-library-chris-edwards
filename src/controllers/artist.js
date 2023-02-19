@@ -1,8 +1,18 @@
-const createArtist = (req, res) => {
-  //   console.log('--->', req.body.artist);
-  res.sendStatus(201);
+const db = require('../src/db/index.js');
 
-  //   .json({ artist: req.body.artist, req.body.genre });
+const createArtist = async (req, res) => {
+  const { artist, genre } = req.body;
+
+  try {
+    const {
+      rows: [artist],
+    } = await db.query(
+      `INSERT INTO Artists (name, genre) VALUES ('${name}','${genre}') RETURNING *`
+    );
+    res.status(201).json(artist);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
 };
 
 module.exports = { createArtist };
