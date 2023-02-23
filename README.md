@@ -27,5 +27,6 @@ This is a basic version of the app and will be updated with more features and fu
 ## Contributors:
 
 **- Chris Edwards:** [https://github.com/CodeChris96](https://)
+**- Code reviewed by:** // Hey code reviewer! Go on... add your name here!
 
 Feel free to fork the repository and contribute to the project.
