@@ -1,3 +1,4 @@
+const { query } = require('express');
 const db = require('../db/index');
 
 const createArtist = async (req, res) => {
@@ -76,9 +77,31 @@ const updateArtist = async (req, res) => {
   }
 };
 
+const deleteArtist = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { rows } = await db.query(
+      'DELETE FROM Artists WHERE id = $1 RETURNING *',
+      [id]
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({
+        message: `The artist ID: ${id} does not exist`,
+      });
+    }
+
+    const deletedArtist = rows[0];
+    res.status(200).json(deletedArtist);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+};
+
 module.exports = {
   createArtist,
   getAllArtists,
   getArtistById,
   updateArtist,
+  deleteArtist,
 };
