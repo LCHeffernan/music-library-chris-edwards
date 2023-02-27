@@ -40,7 +40,7 @@ describe('Read Albums', () => {
   });
 
   describe('GET /albums/{id}', () => {
-    it('returns the artist with the correct id', async () => {
+    it('returns the album with the correct id', async () => {
       const { status, body } = await request(app)
         .get(`/albums/${albums[0].id}`)
         .send();
