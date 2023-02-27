@@ -4,37 +4,37 @@ const db = require('../src/db');
 const app = require('../src/app');
 
 describe('Update Album', () => {
-  let artist;
+  let album;
 
   beforeEach(async () => {
     const { rows } = await db.query(
-      'INSERT INTO Artists (name, genre) VALUES($1, $2) RETURNING *',
-      ['Frank Sinatra', 'Jazz']
+      'INSERT INTO Albums (name, year) VALUES($1, $2) RETURNING *',
+      ['Trilogy: Past, Present & Future', 1918]
     );
-    artist = rows[0];
+    album = rows[0];
   });
 
   describe('PATCH /albums/:id', () => {
     it('updates the artist and returns the updated record', async () => {
       const { status, body } = await request(app)
-        .patch(`/artists/${artist.id}`)
-        .send({ name: 'Frankie Sinatra', genre: 'Easy Listening' });
+        .patch(`/albums/${album.id}`)
+        .send({ name: 'Trilogy: Past, Present and Future', year: 1978 });
 
       expect(status).to.equal(200);
       expect(body).to.deep.equal({
-        id: artist.id,
-        name: 'Frankie Sinatra',
-        genre: 'Easy Listening',
+        id: album.id,
+        name: 'Trilogy: Past, Present and Future',
+        year: 1978,
       });
     });
 
     it('returns a 404 if the artist does not exist', async () => {
       const { status, body } = await request(app)
-        .patch('/artists/99999999')
-        .send({ name: 'Frankie Sinatra', genre: 'Easy Listening' });
+        .patch('/albums/99999999')
+        .send({ name: 'Frankie Sinatra', year: 42789 });
 
       expect(status).to.equal(404);
-      expect(body.message).to.equal('Artist 99999999 does not exist');
+      expect(body.message).to.equal('Album 99999999 does not exist');
     });
   });
 });

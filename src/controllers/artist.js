@@ -1,4 +1,3 @@
-const { query } = require('express');
 const db = require('../db/index');
 
 const createArtist = async (req, res) => {
