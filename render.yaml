@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: music-library-drn-cohort
+    name: music-library
     env: node
     region: frankfurt
     plan: free
