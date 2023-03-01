@@ -3,7 +3,6 @@ const db = require('../db/index');
 const createAlbum = async (req, res) => {
   const { name, year } = req.body;
   const { id: artist_id } = req.params;
-  console.log('------------>', artist_id);
   try {
     const {
       rows: [album],

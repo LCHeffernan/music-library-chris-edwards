@@ -2,33 +2,43 @@ const { expect } = require('chai');
 const request = require('supertest');
 const db = require('../src/db');
 const app = require('../src/app');
+const { it } = require('mocha');
 
-describe('Update Album', () => {
-  let album;
+describe('Update Album', async () => {
+  let artistId, albumId;
 
   beforeEach(async () => {
+    await db.query('DELETE FROM Albums');
+    await db.query('DELETE FROM Artists');
     const { rows } = await db.query(
-      'INSERT INTO Albums (name, year) VALUES($1, $2) RETURNING *',
-      ['Trilogy: Past, Present & Future', 1918]
+      'INSERT INTO Artists (name, genre) VALUES ($1, $2) RETURNING *',
+      ['Led Zeppelin', 'Rock']
     );
-    album = rows[0];
+    artistId = rows[0].id;
   });
 
+  const { rows } = await db.query(
+    'INSERT INTO Albums (name, year, artist_id) VALUES($1, $2, $3) RETURNING *',
+    ['Trilogy: Past, Present & Future', 1918, artistId]
+  );
+  albumId = rows[0].id;
+
   describe('PATCH /albums/:id', () => {
-    it('updates the artist and returns the updated record', async () => {
+    it('updates the album and returns the updated record', async () => {
       const { status, body } = await request(app)
-        .patch(`/albums/${album.id}`)
+        .patch(`/albums/${albumId}`)
         .send({ name: 'Trilogy: Past, Present and Future', year: 1978 });
 
       expect(status).to.equal(200);
       expect(body).to.deep.equal({
-        id: album.id,
+        id: albumId,
         name: 'Trilogy: Past, Present and Future',
         year: 1978,
+        artist_id: artistId,
       });
     });
 
-    it('returns a 404 if the artist does not exist', async () => {
+    it('returns a 404 if the album does not exist', async () => {
       const { status, body } = await request(app)
         .patch('/albums/99999999')
         .send({ name: 'Frankie Sinatra', year: 42789 });

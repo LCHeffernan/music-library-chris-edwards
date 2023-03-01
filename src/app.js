@@ -12,11 +12,10 @@ app.use(morgan('tiny'));
 app.use(helmet());
 
 app.use('/artists', artistRouter);
-app.use('/artists/:id/albums', albumsRouter);
 app.use('/albums', albumsRouter);
 
-app.get('/hello', (req, res) => {
-  return res.status(200).json({ Message: 'Hello World!' });
+app.get('/status', (req, res) => {
+  return res.sendStatus(200);
 });
 
 module.exports = app;

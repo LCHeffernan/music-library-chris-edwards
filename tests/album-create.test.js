@@ -24,15 +24,12 @@ describe('Albums Endpoints', () => {
         .send({
           name: 'Double Fantasy',
           year: 1980,
-          artistId: artistId,
         })
         .expect(201);
-      expect(res.body).toMatchObject({
-        id: expect.any(Number),
-        name: 'Double Fantasy',
-        year: 1980,
-        artistId,
-      });
+
+      expect(res.body).to.have.property('id');
+      expect(res.body.name).to.equal('Double Fantasy');
+      expect(res.body.year).to.equal(1980);
     });
 
     it('returns an error if album creation fails', async () => {

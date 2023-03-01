@@ -7,19 +7,25 @@ const { it } = require('mocha');
 describe('Read Albums', () => {
   let albums;
   beforeEach(async () => {
+    const {
+      rows: [artist],
+    } = await db.query(
+      'INSERT INTO Artists (name, genre) VALUES ($1, $2) RETURNING *',
+      ['Led Zeppelin', 'Rock']
+    );
     const responses = await Promise.all([
-      db.query('INSERT INTO Albums (name, year) VALUES( $1, $2) RETURNING *', [
-        'White Album',
-        1968,
-      ]),
-      db.query('INSERT INTO Albums (name, year) VALUES( $1, $2) RETURNING *', [
-        'Duets',
-        1993,
-      ]),
-      db.query('INSERT INTO Albums (name, year) VALUES( $1, $2) RETURNING *', [
-        'Legend',
-        1984,
-      ]),
+      db.query(
+        'INSERT INTO Albums (name, year, artist_id) VALUES( $1, $2, $3) RETURNING *',
+        ['White Album', 1968, artist.id]
+      ),
+      db.query(
+        'INSERT INTO Albums (name, year, artist_id) VALUES( $1, $2, $3) RETURNING *',
+        ['Duets', 1993, artist.id]
+      ),
+      db.query(
+        'INSERT INTO Albums (name, year, artist_id) VALUES( $1, $2, $3) RETURNING *',
+        ['Legend', 1984, artist.id]
+      ),
     ]);
     albums = responses.map(({ rows }) => rows[0]);
   });
