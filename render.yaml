@@ -7,7 +7,7 @@ services:
     buildCommand: npi ci
     startCommand: npm run migrate && node index.js
     envVars: 
-      key: PGDATABASE
+    - key: PGDATABASE
       fromDatabase: 
         name: music-library-database
         property: database
