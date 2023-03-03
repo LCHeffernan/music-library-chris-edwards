@@ -5,12 +5,12 @@ const router = express.Router();
  * @swagger
  * /:
  *  get:
- *      description: Returns html for the default ExpressJS welcome page.
+ *      description: Returns status page.
  *      responses:
  *          200:
- *              description: html content
+ *              description: status page
  */
-router.get('/', function (req, res) {
+router.get('/status', function (req, res) {
   res.render('index', { title: 'Express' });
 });
 

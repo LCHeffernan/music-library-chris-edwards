@@ -31,7 +31,7 @@ app.use('/artists', artistRouter);
 app.use('/albums', albumsRouter);
 
 app.get('/status', (req, res) => {
-  return res.sendStatus(200);
+  return res.sendStatus(200).json({ status: 'OK' });
 });
 
 module.exports = app;
