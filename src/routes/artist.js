@@ -6,6 +6,39 @@ const router = express.Router();
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     Artist:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: The ID of the artist
+ *         name:
+ *           type: string
+ *           description: The name of the artist
+ *         genre:
+ *           type: string
+ *           description: The genre of the artist's music
+ *       required:
+ *         - name
+ *         - genre
+ *     NewArtist:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: The name of the artist
+ *         genre:
+ *           type: string
+ *           description: The genre of the artist's music
+ *       required:
+ *         - name
+ *         - genre
+ */
+
+/**
+ * @swagger
  * tags:
  *   name: Artists
  *   description: API endpoints for managing artists
